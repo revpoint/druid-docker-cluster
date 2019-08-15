@@ -10,18 +10,18 @@ volumes:
   router_var: {}
   minio_data: {}
 
-services: 
+services:
 
   druid_build:
-    build: 
+    build:
       context: ./src
       dockerfile: Dockerfile.druid
-      args: 
+      args:
         - ARG_DRUID_VERSION=0.15.0-incubating
     image: anskarl/druid:latest
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8888
-      
+
 
   minio:
     image: minio/minio:latest
@@ -34,7 +34,7 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256M
-    ports: 
+    ports:
       - "9000:9000"
     environment:
       - MINIO_ACCESS_KEY=DRUIDDEEPSTORASGEACCESSKEY
@@ -81,7 +81,7 @@ services:
     ports:
       - "2181:2181"
       - "2888:2888"
-      - "3888:3888" 
+      - "3888:3888"
     environment:
       - ZOO_MY_ID=1
     logging:
@@ -98,19 +98,19 @@ services:
         reservations:
           cpus: '1'
           memory: 512M
-    depends_on: 
+    depends_on:
       - minio
       - zookeeper
       - postgres
     ports:
       - "8081:8081"
-    command: 
+    command:
       - coordinator
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8081
       - DRUID_LOG_LEVEL=ERROR
     volumes:
-      - coordinator_var:/opt/druid/var    
+      - coordinator_var:/opt/druid/var
     logging:
       driver: json-file
 
@@ -125,7 +125,7 @@ services:
         reservations:
           cpus: '1'
           memory: 512M
-    depends_on: 
+    depends_on:
       - minio
       - zookeeper
       - postgres
@@ -133,13 +133,13 @@ services:
     ports:
       - "8082:8082"
     command:
-      - broker 
-    environment: 
-      - DRUID_SERVICE_PORT=8092
+      - broker
+    environment:
+      - DRUID_SERVICE_PORT=8082
       - DRUID_LOG_LEVEL=ERROR
       - MEMORY_MAX_DIRECT_SIZE=768m
     volumes:
-      - broker_var:/opt/druid/var   
+      - broker_var:/opt/druid/var
 
   historical:
     container_name: historical
@@ -159,9 +159,9 @@ services:
       - coordinator
     ports:
       - "8083:8083"
-    command: 
+    command:
       - historical
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8083
       - DRUID_LOG_LEVEL=INFO
       - MEMORY_MAX_DIRECT_SIZE=1280m
@@ -188,13 +188,13 @@ services:
       - postgres
     ports:
       - "8090:8090"
-    command: 
+    command:
       - overlord
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8090
       - DRUID_LOG_LEVEL=ERROR
-    volumes: 
-      - overlord_var:/opt/druid/var  
+    volumes:
+      - overlord_var:/opt/druid/var
       - ./dataset:/dataset:ro
     logging:
       driver: json-file
@@ -217,12 +217,12 @@ services:
       - coordinator
     ports:
       - "8091:8091"
-    command: 
+    command:
       - middleManager
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8091
       - DRUID_LOG_LEVEL=INFO
-    volumes: 
+    volumes:
       - middle_var:/opt/druid/var
       - ./dataset:/dataset:ro
     logging:
@@ -251,11 +251,11 @@ services:
     ports:
       - "8888:8888"
     command: router
-    environment: 
+    environment:
       - DRUID_SERVICE_PORT=8888
       - DRUID_LOG_LEVEL=ERROR
-    volumes: 
-      - router_var:/opt/druid/var      
+    volumes:
+      - router_var:/opt/druid/var
     logging:
       driver: json-file
 
@@ -266,7 +266,7 @@ services:
     depends_on:
       - minio
     links:
-      - minio  
+      - minio
     environment:
       - MINIO_ACCESS_KEY=DRUIDDEEPSTORASGEACCESSKEY
       - MINIO_SECRET_KEY=DRUIDDEEPSTORASGESECRETKEY
