@@ -1,7 +1,7 @@
 {
   "type": "index_parallel",
   "dataSchema": {
-    "dataSource": "auto_insurance",
+    "dataSource": "home_insurance",
     "granularitySpec": {
       "type": "uniform",
       "segmentGranularity": "DAY",
@@ -23,9 +23,8 @@
               "type": "long"
             },
             "current_insurance_co",
-            "currently_insured",
             "gender",
-            "has_tcpa_consent_text",
+            "tobacco_user",
             "landing_page_domain",
             {
               "name": "lead_age",
@@ -34,18 +33,6 @@
             "lead_id_code",
             "marital_status",
             {
-              "name": "num_drivers",
-              "type": "long"
-            },
-            {
-              "name": "num_vehicles",
-              "type": "long"
-            },
-            {
-              "name": "num_violations",
-              "type": "long"
-            },
-            {
               "name": "months_at_employer",
               "type": "long"
             },
@@ -53,22 +40,53 @@
               "name": "months_at_residence",
               "type": "long"
             },
+            {
+              "name": "number_in_household",
+              "type": "long"
+            },
+            {
+              "name": "year_built",
+              "type": "long"
+            },
+            {
+              "name": "building_stories",
+              "type": "long"
+            },
+            "current_insurance_company",
+            "current_medical_treatment",
+            "current_prescriptions",
             "occupation",
             "ping_response",
-            {
-              "name": "ping_price",
-              "type": "float"
-            },
             "residence_type",
             "source_id",
             "state",
             "tcpa_compliant",
             "trusted_form_cert",
-            "vehicle_make",
-            "vehicle_ownership",
-            "vehicle_year",
             "vendor_campaign_id",
-            "zip3"
+            "zip3",
+            "has_tcpa_consent_text",
+            "property_type",
+            "ownership_type",
+            "occupancy_type",
+            "garage",
+            "home_security",
+            "construction_class",
+            "construction_type",
+            "heating_type",
+            "wiring_type",
+            "newly_purchase",
+            "fireplace",
+            "deadbolt_locks",
+            "smoke_alarm",
+            "fire_alarm",
+            "copper_pipes",
+            "brush_hazard",
+            "flood_area",
+            "smoker",
+            "claims",
+            "currently_insured",
+            "insurance_policy",
+            "coverage_type"
           ]
         }
       }
@@ -85,7 +103,7 @@
     "firehose": {
       "type": "local",
       "baseDir": "/dataset/pinglogs/2019-08-05-10",
-      "filter": "auto_insurance.txt"
+      "filter": "home_insurance.txt"
     }
   },
   "tuningConfig": {

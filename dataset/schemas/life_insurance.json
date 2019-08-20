@@ -1,7 +1,7 @@
 {
   "type": "index_parallel",
   "dataSchema": {
-    "dataSource": "auto_insurance",
+    "dataSource": "life_insurance",
     "granularitySpec": {
       "type": "uniform",
       "segmentGranularity": "DAY",
@@ -22,53 +22,42 @@
               "name": "age",
               "type": "long"
             },
-            "current_insurance_co",
-            "currently_insured",
             "gender",
-            "has_tcpa_consent_text",
+            "tobacco",
             "landing_page_domain",
             {
               "name": "lead_age",
               "type": "float"
             },
             "lead_id_code",
-            "marital_status",
             {
-              "name": "num_drivers",
+              "name": "height",
               "type": "long"
             },
-            {
-              "name": "num_vehicles",
-              "type": "long"
-            },
-            {
-              "name": "num_violations",
-              "type": "long"
-            },
-            {
-              "name": "months_at_employer",
-              "type": "long"
-            },
-            {
-              "name": "months_at_residence",
-              "type": "long"
-            },
+            "current_medical_treatment",
+            "current_prescriptions",
             "occupation",
             "ping_response",
-            {
-              "name": "ping_price",
-              "type": "float"
-            },
             "residence_type",
             "source_id",
             "state",
             "tcpa_compliant",
             "trusted_form_cert",
-            "vehicle_make",
-            "vehicle_ownership",
-            "vehicle_year",
             "vendor_campaign_id",
-            "zip3"
+            "zip3",
+            "has_tcpa_consent_text",
+            "marital_status",
+            "relative_heart",
+            "relative_cancer",
+            "hospitalized",
+            "ongoing_medical_treatment",
+            "medical_condition",
+            "medications",
+            "has_dui",
+            "previously_denied",
+            "hazard_pilot",
+            "hazard_felony",
+            "hazardous_activity"
           ]
         }
       }
@@ -85,7 +74,7 @@
     "firehose": {
       "type": "local",
       "baseDir": "/dataset/pinglogs/2019-08-05-10",
-      "filter": "auto_insurance.txt"
+      "filter": "life_insurance.txt"
     }
   },
   "tuningConfig": {
